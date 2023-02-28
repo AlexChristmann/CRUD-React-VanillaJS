@@ -64,6 +64,7 @@ export const Personenliste = () => {
             </tr>
           </thead>
           <tbody>
+                //Mapping der Personendaten für die Tabelle
             {allePersonen.map((person) => (
               <tr key={person.personen_id}>
                 <td>{person.personen_id}</td>
