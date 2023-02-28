@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+//isAuthenticated, setAuth aus der App-Komponente
 const Header = ({ isAuthenticated, setAuth }) => {
   const logout = (e) => {
     e.preventDefault();
