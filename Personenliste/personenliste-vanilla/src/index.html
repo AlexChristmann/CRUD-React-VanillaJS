@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Personenmanagement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-light bg-light">
+            <h1 style="position: relative; top: 10px">Personenliste</h1>
+        </nav>
+    </div>
+    <div>
+        <div>
+            <h1 class="text-center my-5">Anmelden</h1>
+            <div style="display: flex; justify-content: center" ;>
+                <form id="login" class="row g-3">
+                    <div class="col-auto">
+                        <input id="benutzername" type="text" name="benutzername" class="form-control my-3"
+                            placeholder="Benutzername" />
+                        <input id="passwort" type="password" name="passwort" class="form-control my-3"
+                            placeholder="Passwort" />
+                        <button class="btn btn-success">Anmelden</button> <br></br>
+                        Noch nicht registriert? Klicke <a href="./register.html">hier</a>.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        //Abgleich des JWT mit dem Backend
+        const isAuth = async () => {
+            try {
+                const res = await fetch("http://localhost:5000/auth/verified", {
+                    method: "GET",
+                    headers: { token: localStorage.token }
+                })
+                const parseRes = await res.json();
+                parseRes === true ? window.open("./personenliste.html", "_self") : "";
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        //beim Laden der Seite wird geprüft, ob ein JWT vorhanden ist
+        window.onload = () => {
+            if (localStorage.getItem("token") !== null) {
+                isAuth();
+            }
+        }
+        //Anmeldelogik
+        async function onSubmitForm(e) {
+            e.preventDefault();
+            try {
+                //Werte aus den Eingabefelder werden gespeichert
+                const userCredentials = {
+                    benutzername: document.getElementById("benutzername").value,
+                    passwort: document.getElementById("passwort").value
+                }
+                const body = userCredentials;
+                const res = await fetch("http://localhost:5000/auth/login",
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(body)
+
+                    });
+                const parseRes = await res.json();
+                //wenn als Antwort ein Token gesendet wird, wird dieses gespeichert und auf die Personenliste weitergeleitet
+                if (parseRes.token) {
+                    localStorage.setItem("token", parseRes.token);
+                    window.alert("Erfolgreich angemeldet.");
+                    window.open("./personenliste.html", "_self");
+                } else {
+                    window.alert(parseRes);
+                }
+            } catch (error) {
+                window.alert(error.message);
+            }
+        }
+        document.getElementById("login").addEventListener("submit", onSubmitForm);
+    </script>
+</body>
+</html>
