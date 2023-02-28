@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Eingabemaske = () => {
+  //Value der Input Felder werden mit onChange in der Variable input gespeichert
   const [input, setInput] = useState({
     vorname: "",
     nachname: "",
@@ -12,7 +13,7 @@ const Eingabemaske = () => {
     email: "",
     mobilrufnummer: "",
   });
-
+//Destrukturieren der Variable input
   const {
     vorname,
     nachname,
@@ -26,7 +27,7 @@ const Eingabemaske = () => {
 
   const onChange = (e) =>
     setInput({ ...input, [e.target.name]: e.target.value });
-
+//Personendaten werden ans Backend gesendet
   const onSubmitForm = async (e) => {
     try {
       e.preventDefault();
