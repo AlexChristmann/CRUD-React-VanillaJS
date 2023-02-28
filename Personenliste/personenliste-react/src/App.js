@@ -34,6 +34,7 @@ const App = () => {
   return (
     <>
       <Header isAuthenticated={isAuthenticated} setAuth={setAuth} />
+    //Routing; Personenliste und Eingabemaske sind nur aufrufbar, wenn der Benutzer authentifiziert ist
       <Routes>
         <Route path="/" element={!isAuthenticated ? (<Login setAuth={setAuth} />) 
             : 
