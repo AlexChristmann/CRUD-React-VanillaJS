@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 
 const Bearbeitungsmaske = ({ person }) => {
-
+    //Value der Input Felder werden mit onChange in der Variable input gespeichert
     const [input, setInput] = useState(person);
-
 
     const onChange = (e) =>
         setInput({ ...input, [e.target.name]: e.target.value });
-
+    //Bearbeitete Personendaten werden ans Backend gesendet
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
