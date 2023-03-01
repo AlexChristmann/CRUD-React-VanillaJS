@@ -4,25 +4,12 @@ import { Link } from "react-router-dom";
 const Eingabemaske = () => {
   //Value der Input Felder werden mit onChange in der Variable input gespeichert
   const [input, setInput] = useState({
-    vorname: "",
-    nachname: "",
-    strasse: "",
-    hausnummer: "",
-    plz: "",
-    ort: "",
-    email: "",
-    mobilrufnummer: "",
+    vorname: "", nachname: "", strasse: "", hausnummer: "",
+    plz: "", ort: "", email: "", mobilrufnummer: "",
   });
 //Destrukturieren der Variable input
   const {
-    vorname,
-    nachname,
-    strasse,
-    hausnummer,
-    plz,
-    ort,
-    email,
-    mobilrufnummer,
+    vorname, nachname, strasse, hausnummer, plz, ort, email, mobilrufnummer,
   } = input;
 
   const onChange = (e) =>
