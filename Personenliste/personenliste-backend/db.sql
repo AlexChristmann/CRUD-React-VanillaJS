@@ -16,5 +16,5 @@ CREATE TABLE personen(
     plz INT NOT NULL,
     ort VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    mobilrufnummer BIGINT,
+    mobilrufnummer BIGINT
 );
